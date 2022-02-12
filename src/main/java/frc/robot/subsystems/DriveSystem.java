@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.REVLibError;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -26,6 +27,9 @@ public class DriveSystem extends SubsystemBase {
     private DifferentialDrive differentialDrive;
     private AnalogGyro driveGyro;
     
+    private RelativeEncoder leftEncoder;
+    
+    private RelativeEncoder rightEncoder;
     boolean reverse = false;
 
     public DriveSystem() {
@@ -50,7 +54,9 @@ public class DriveSystem extends SubsystemBase {
         driveGyro = new AnalogGyro(0);
         addChild("Gyro", driveGyro);
         driveGyro.setSensitivity(0.007);
-
+       
+        leftEncoder = leftMotor.getEncoder();
+        rightEncoder = rightMotor.getEncoder();
     }
 
     //CED even more gyro stuff
@@ -78,7 +84,6 @@ public class DriveSystem extends SubsystemBase {
             reverse = true;
         }
     }
-    
     public void tankDrive(double leftSpeed, double rightSpeed) {
       if (reverse) {
           differentialDrive.tankDrive(rightSpeed, leftSpeed);
@@ -86,6 +91,31 @@ public class DriveSystem extends SubsystemBase {
           differentialDrive.tankDrive(-leftSpeed, -rightSpeed);
       }
   }
+  public void driveForward(double speed, double targetHeading) {
+    final double scale = .01;
+    double leftSpeed;
+    double rightSpeed;
+    double headingError = getAngle() - targetHeading;
+
+    leftSpeed = Utilities.Clamp(Math.abs(speed) - headingError * scale,
+    -Constants.Drive.kMaxDriveSpeed, Constants.Drive.kMaxDriveSpeed);
+    rightSpeed = Utilities.Clamp(Math.abs(speed) + headingError * scale,
+    -Constants.Drive.kMaxDriveSpeed, Constants.Drive.kMaxDriveSpeed);
+    tankDrive(leftSpeed, rightSpeed);
+}
+
+public void driveBackward(double speed, double targetHeading) {
+  final double scale = .01;
+  double leftSpeed;
+  double rightSpeed;
+  double headingError = getAngle() - targetHeading;
+
+  leftSpeed =Utilities.Clamp(-(speed) - headingError * scale,
+  -Constants.Drive.kMaxDriveSpeed, Constants.Drive.kMaxDriveSpeed);
+  rightSpeed = Utilities.Clamp(-(speed) + headingError * scale,
+  -Constants.Drive.kMaxDriveSpeed, Constants.Drive.kMaxDriveSpeed);
+  tankDrive(leftSpeed, rightSpeed);
+}
 
     @Override
     public void periodic() {
@@ -98,7 +128,20 @@ public class DriveSystem extends SubsystemBase {
         // This method will be called once per scheduler run when in simulation
 
     }
-//     public void move(double leftSpeed, double rightSpeed) {
-//         differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
-//     }
+    // public void move(double leftSpeed, double rightSpeed) {
+    //     differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
+    // }
+  
+    public double getDistanceLeft() {
+      return leftEncoder.getPosition(); //TODO wich one of these  is a reversed value?
+  }
+  public double getDistanceRight() {
+      return rightEncoder.getPosition();
+
+  }
+  
+    public double getAverageDistance() {
+      return (Math.abs(getDistanceRight()) + Math.abs(getDistanceLeft())) / 2;
+  }
+
 }
