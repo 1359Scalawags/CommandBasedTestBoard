@@ -1,9 +1,10 @@
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
-//import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import frc.robot.Robot;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSystem;
 
@@ -29,8 +30,12 @@ public class ManualDrive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double leftSpeed = RobotContainer.getInstance().getdriverController().getLeftY();
-        double rightSpeed = RobotContainer.getInstance().getdriverController().getRightY();
+        double leftJoystick = RobotContainer.getInstance().getdriverController().getLeftY();
+        double rightJoystick = RobotContainer.getInstance().getdriverController().getRightY();
+        double triggerJoystick = (RobotContainer.getInstance().getdriverController().getLeftTriggerAxis() + RobotContainer.getInstance().getdriverController().getRightTriggerAxis()) / 2;
+        
+        double leftSpeed = leftJoystick * (Constants.Drive.kBaseDriveSpeed + Constants.Drive.kBoostSpeed * triggerJoystick);
+        double rightSpeed = rightJoystick * (Constants.Drive.kBaseDriveSpeed + Constants.Drive.kBoostSpeed * triggerJoystick);
         m_driveSystem.move(leftSpeed, rightSpeed);
     }
 
