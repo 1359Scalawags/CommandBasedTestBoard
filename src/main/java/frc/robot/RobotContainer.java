@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.subsystems.*;
@@ -54,7 +55,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands
-
+    m_driveSystem.setDefaultCommand(new ManualDrive(m_driveSystem));
+    m_otherSystem.setDefaultCommand(new ManualOther(m_otherSystem));
     // Configure autonomous sendable chooser
 
     m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
