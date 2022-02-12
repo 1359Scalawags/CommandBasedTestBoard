@@ -13,10 +13,8 @@ public class Constants {
 
     public static final class Drive {
         //Drive motor ports
-        public static final int kLeftFrontPort = 0;
-        public static final int kLeftRearPort = 1;
-        public static final int kRightFrontPort = 2;
-        public static final int kRightRearPort = 3;
+        public static final int kLeftFrontPort = 21;
+        public static final int kRightFrontPort = 23;
         //Drive motor speeds
         public static final float kBoostSpeed = 0.85f;
         public static final float kMaxDriveSpeed = 0.85f;

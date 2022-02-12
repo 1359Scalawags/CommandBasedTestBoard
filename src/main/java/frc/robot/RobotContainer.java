@@ -2,6 +2,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
