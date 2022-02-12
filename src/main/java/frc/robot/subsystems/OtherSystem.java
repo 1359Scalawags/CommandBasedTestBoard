@@ -47,4 +47,12 @@ public class OtherSystem extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    public void setServo(double value) {
+        servo.set(value);
+    }
+
+    public double getServo() {
+        return servo.get();
+    }
+
 }
