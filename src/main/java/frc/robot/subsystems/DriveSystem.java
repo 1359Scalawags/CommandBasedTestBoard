@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,13 +25,13 @@ public class DriveSystem extends SubsystemBase {
     private AnalogGyro gyro;
 
     public DriveSystem() {
-        leftMotor = new CANSparkMax(0, MotorType.kBrushless);
+        leftMotor = new CANSparkMax(Constants.Drive.kLeftFrontPort, MotorType.kBrushless);
 
         leftMotor.restoreFactoryDefaults();
         leftMotor.setInverted(false);
         leftMotor.setIdleMode(IdleMode.kCoast);
 
-        rightMotor = new CANSparkMax(1, MotorType.kBrushless);
+        rightMotor = new CANSparkMax(Constants.Drive.kRightFrontPort, MotorType.kBrushless);
 
         rightMotor.restoreFactoryDefaults();
         rightMotor.setInverted(false);
