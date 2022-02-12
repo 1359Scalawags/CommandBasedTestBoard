@@ -25,6 +25,8 @@ public class DriveSystem extends SubsystemBase {
     private CANSparkMax rightMotor;
     private DifferentialDrive differentialDrive;
     private AnalogGyro driveGyro;
+    
+    boolean reverse = false;
 
     public DriveSystem() {
         leftMotor = new CANSparkMax(Constants.Drive.kLeftFrontPort, MotorType.kBrushless);
@@ -69,7 +71,21 @@ public class DriveSystem extends SubsystemBase {
         differentialDrive.arcadeDrive(moveSpeed, angleOutput);
        
       }
-
+      public void reverseDirection() {
+        if (reverse) {
+            reverse = false;
+        } else {
+            reverse = true;
+        }
+    }
+    
+    public void tankDrive(double leftSpeed, double rightSpeed) {
+      if (reverse) {
+          differentialDrive.tankDrive(rightSpeed, leftSpeed);
+      } else {
+          differentialDrive.tankDrive(-leftSpeed, -rightSpeed);
+      }
+  }
 
     @Override
     public void periodic() {
