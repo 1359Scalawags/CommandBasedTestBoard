@@ -4,6 +4,7 @@ package frc.robot;
 import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Drive.ManualDrive;
+import frc.robot.commands.Drive.ReverseDrive;
 import frc.robot.commands.Drive.TurnByAngle;
 import frc.robot.commands.Drive.moveFoward;
 import frc.robot.subsystems.*;
@@ -97,9 +98,13 @@ public XboxController getassistController() {
     moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 3, 0.25), true);
     SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 3, 0.25));
 
-    final JoystickButton turnByAngle = new JoystickButton(driverController, XboxController.Button.kX.value);
+    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kX.value); //TODO: Finish Buttons!!!
     //turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, turnAngle));
     //SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, turnAngle));
+
+    final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
+    reverseDriveBtn.whenPressed(new ReverseDrive(m_driveSystem), true); 
+    SmartDashboard.putData("reverseDriveBtn", new ReverseDrive(m_driveSystem));
   }
 
   
