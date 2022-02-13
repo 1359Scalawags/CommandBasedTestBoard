@@ -103,7 +103,9 @@ public class DriveSystem extends SubsystemBase {
     -Constants.Drive.kMaxDriveSpeed, Constants.Drive.kMaxDriveSpeed);
     tankDrive(leftSpeed, rightSpeed);
 }
-
+public void stop() {
+  tankDrive(0, 0);
+}
 public void driveBackward(double speed, double targetHeading) {
   final double scale = .01;
   double leftSpeed;
