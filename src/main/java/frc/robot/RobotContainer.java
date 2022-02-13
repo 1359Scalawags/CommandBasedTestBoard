@@ -4,6 +4,7 @@ package frc.robot;
 import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Drive.ManualDrive;
+import frc.robot.commands.Drive.moveFoward;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -89,6 +90,11 @@ public XboxController getassistController() {
     final JoystickButton templateBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
     templateBtn.whenPressed(new AutonomousCommand(), true);
     SmartDashboard.putData("TemplateBtn", new AutonomousCommand());
+
+    final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
+    moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 3, 0.25), true);
+    SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 3, 0.25));
+
 
   }
 
