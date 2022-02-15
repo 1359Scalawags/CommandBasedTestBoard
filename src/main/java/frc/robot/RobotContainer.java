@@ -95,8 +95,8 @@ public XboxController getassistController() {
     SmartDashboard.putData("TemplateBtn", new AutonomousCommand());
 
     final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
-    moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 3, 0.25), true);
-    SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 3, 0.25));
+    moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 20, 0.25), true);
+    SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 20, 0.25));
 
     final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kX.value); //TODO: Finish Buttons!!!
     //turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, turnAngle));
