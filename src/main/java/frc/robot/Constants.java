@@ -2,7 +2,6 @@
 package frc.robot;
 
 import com.revrobotics.RelativeEncoder;
-
 import edu.wpi.first.wpilibj.Timer; //TODO: Do we need to import a timer or not?
 
 public class Constants {
