@@ -2,7 +2,6 @@
 package frc.robot;
 
 import com.revrobotics.RelativeEncoder;
-
 import edu.wpi.first.wpilibj.Timer; //TODO: Do we need to import a timer or not?
 
 public class Constants {
@@ -16,9 +15,9 @@ public class Constants {
         public static final int kLeftFrontPort = 1;
         public static final int kRightFrontPort = 23;
         //Drive motor speeds
-        public static final float kBoostSpeed = 0.85f;
+        public static final float kBoostSpeed = 0.75f;
         public static final float kMaxDriveSpeed = 0.85f;
-        public static final float kBaseDriveSpeed = 0.15f;
+        public static final float kBaseDriveSpeed = 0.25f;
         //Motor varibles
         public static final double PID_P = 0.00001;
         public static final double PID_I = 0.000005;
