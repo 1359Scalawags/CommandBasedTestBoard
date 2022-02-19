@@ -7,6 +7,7 @@ import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.commands.Drive.ReverseDrive;
 import frc.robot.commands.Drive.TurnByAngle;
 import frc.robot.commands.Drive.moveFoward;
+import frc.robot.commands.Vision.UpdateTargets;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +36,7 @@ public class RobotContainer {
   // The robot's subsystems
   public final OtherSystem m_otherSystem = new OtherSystem();
   public final DriveSystem m_driveSystem = new DriveSystem();
+  public final VisionSystem m_visionSystem = new VisionSystem();
 
   // Joysticks
   private final XboxController assistController= new XboxController(1);
@@ -61,6 +63,7 @@ public class RobotContainer {
     // Configure default commands
     m_driveSystem.setDefaultCommand(new ManualDrive(m_driveSystem));
     m_otherSystem.setDefaultCommand(new ManualOther(m_otherSystem));
+    m_visionSystem.setDefaultCommand(new UpdateTargets(m_visionSystem));
     // Configure autonomous sendable chooser
 
     m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
