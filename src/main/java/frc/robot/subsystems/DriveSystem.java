@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Utilities;
@@ -24,7 +25,7 @@ public class DriveSystem extends SubsystemBase {
     private CANSparkMax leftMotor;
     private CANSparkMax rightMotor;
     private DifferentialDrive differentialDrive;
-    private AnalogGyro driveGyro;
+    private ADXRS450_Gyro driveGyro;
     
     private RelativeEncoder leftEncoder;
     
@@ -50,9 +51,10 @@ public class DriveSystem extends SubsystemBase {
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
 
-        driveGyro = new AnalogGyro(0);
+        driveGyro = new ADXRS450_Gyro();
         addChild("Gyro", driveGyro);
-        driveGyro.setSensitivity(0.007);
+        //driveGyro.setSensitivity(0.007);
+        driveGyro.calibrate();
        
         leftEncoder = leftMotor.getEncoder();
         rightEncoder = rightMotor.getEncoder();
