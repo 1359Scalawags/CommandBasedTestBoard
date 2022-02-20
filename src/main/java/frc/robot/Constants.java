@@ -40,7 +40,7 @@ public class Constants {
         //Climb Motors and Servos (Solenoids too)
         public static final int kClimbMotor = 23;
         public static final int kTraverseMotor = 7;
-        public static final int kAntiDropClimbServo = 0;
+        public static final int kAntiDropClimbServo = 9;
         public static final int kAntiDropTraverseServo = 1;
         public static final int kClimberSolenoid = 9;
         //Climb Motor Speeds

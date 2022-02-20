@@ -39,10 +39,10 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
 
   // The robot's subsystems
-  public final OtherSystem m_otherSystem = new OtherSystem();
-  public DriveSystem m_driveSystem = new DriveSystem();
+  //public final OtherSystem m_otherSystem = new OtherSystem();
+  public DriveSystem m_driveSystem;
   public final VisionSystem m_visionSystem = new VisionSystem();
-  public ClimbSystem m_climbSystem = new ClimbSystem();
+  public ClimbSystem m_climbSystem;
 
   // Joysticks
   private final XboxController assistController = new XboxController(1);
@@ -75,8 +75,8 @@ public class RobotContainer {
       SmartDashboard.putData("ManualDrive", new ManualDrive(m_driveSystem));
     }
 
-    SmartDashboard.putData("ManualServo", new ManualServo(m_otherSystem));
-    SmartDashboard.putData("ManualSparkMotor", new ManualSparkMotor(m_otherSystem));
+    //SmartDashboard.putData("ManualServo", new ManualServo(m_otherSystem));
+    //SmartDashboard.putData("ManualSparkMotor", new ManualSparkMotor(m_otherSystem));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -86,8 +86,8 @@ public class RobotContainer {
       m_driveSystem.setDefaultCommand(new ManualDrive(m_driveSystem));
     }
    
-    m_otherSystem.setDefaultCommand(new ManualOther(m_otherSystem));
-    m_visionSystem.setDefaultCommand(new UpdateTargets(m_visionSystem));
+    //m_otherSystem.setDefaultCommand(new ManualOther(m_otherSystem));
+    //m_visionSystem.setDefaultCommand(new UpdateTargets(m_visionSystem));
     // Configure autonomous sendable chooser
 
     m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
