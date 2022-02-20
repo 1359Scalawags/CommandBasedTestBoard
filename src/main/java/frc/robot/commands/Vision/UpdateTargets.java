@@ -14,20 +14,20 @@ import frc.robot.subsystems.VisionSystem;
  */
 public class UpdateTargets extends CommandBase {
 
-    private final VisionSystem m_visionSystem;
+    // private final VisionSystem m_visionSystem;
 
-    NetworkTable table;
-    NetworkTableEntry tx;
-    NetworkTableEntry ty;
-    NetworkTableEntry ta;
+    // NetworkTable table;
+    // NetworkTableEntry tx;
+    // NetworkTableEntry ty;
+    // NetworkTableEntry ta;
  
     public UpdateTargets(VisionSystem subsystem) {
-        m_visionSystem = subsystem;
-        addRequirements(m_visionSystem);
-        table = NetworkTableInstance.getDefault().getTable("limelight");
-        tx = table.getEntry("tx");
-        ty = table.getEntry("ty");
-        ta = table.getEntry("ta");
+        // m_visionSystem = subsystem;
+        // addRequirements(m_visionSystem);
+        // table = NetworkTableInstance.getDefault().getTable("limelight");
+        // tx = table.getEntry("tx");
+        // ty = table.getEntry("ty");
+        // ta = table.getEntry("ta");
     }
 
     // Called when the command is initially scheduled.
@@ -39,15 +39,15 @@ public class UpdateTargets extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // read values periodically
-        double x = tx.getDouble(0.0);
-        double y = ty.getDouble(0.0);
-        double area = ta.getDouble(0.0);
+        // // read values periodically
+        // double x = tx.getDouble(0.0);
+        // double y = ty.getDouble(0.0);
+        // // double area = ta.getDouble(0.0);
 
         // post to smart dashboard periodically
-        SmartDashboard.putNumber("LimelightX", x);
-        SmartDashboard.putNumber("LimelightY", y);
-        SmartDashboard.putNumber("LimelightArea", area);
+        // SmartDashboard.putNumber("LimelightX", x);
+        // SmartDashboard.putNumber("LimelightY", y);
+        // SmartDashboard.putNumber("LimelightArea", area);
 
     }
 

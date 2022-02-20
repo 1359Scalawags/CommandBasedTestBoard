@@ -22,7 +22,7 @@ public class LockTraverse extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_traverseSystem.lockTraverse(true);        
+      //  m_traverseSystem.lockTraverse(true);        
     }
 
     // Called every time the scheduler runs while the command is scheduled.

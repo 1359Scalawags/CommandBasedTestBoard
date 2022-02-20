@@ -23,23 +23,22 @@ import edu.wpi.first.wpilibj.simulation.EncoderSim;
 
 public class ClimbSystem extends SubsystemBase {
     private DigitalInput LowerClimbLimitSwitch;
-    private DigitalInput LowerTraverseLimitSwitch;
+    // private DigitalInput LowerTraverseLimitSwitch;
 
     private CANSparkMax climbMotor;
     private Servo antidropClimbServo;
     private Solenoid climberSolenoid;
-    private CANSparkMax traverseMotor;
-    private Servo antidropTraverseServo;
+    // private CANSparkMax traverseMotor;
+    // private Servo antidropTraverseServo;
 
 
     private RelativeEncoder climbEncoder;
 
-    private RelativeEncoder traverseEncoder;
+   // private RelativeEncoder traverseEncoder;
 
     // used to turn off motors to prevent unnecessary strain
     public int localClimbMotorSpeed;
-    public int localTraverseMotorSpeed;
-
+    // public int localTraverseMotorSpeed;
     public ClimbSystem() {
 
 
@@ -54,24 +53,24 @@ public class ClimbSystem extends SubsystemBase {
         antidropClimbServo = new Servo(Constants.Climb.kAntiDropClimbServo);
         addChild("AntidropClimbServo", antidropClimbServo);
 
-        antidropTraverseServo = new Servo(Constants.Climb.kAntiDropTraverseServo);
-        addChild("AntidropTraverseServo", antidropTraverseServo);
+        // antidropTraverseServo = new Servo(Constants.Climb.kAntiDropTraverseServo);
+        // addChild("AntidropTraverseServo", antidropTraverseServo);
 
-        traverseMotor = new CANSparkMax(Constants.Climb.kTraverseMotor, MotorType.kBrushless);
+        // traverseMotor = new CANSparkMax(Constants.Climb.kTraverseMotor, MotorType.kBrushless);
 
-        traverseMotor.restoreFactoryDefaults();
-        traverseMotor.setInverted(false);
-        traverseMotor.setIdleMode(IdleMode.kCoast);
+        // traverseMotor.restoreFactoryDefaults();
+        // traverseMotor.setInverted(false);
+        // traverseMotor.setIdleMode(IdleMode.kCoast);
 
         LowerClimbLimitSwitch = new DigitalInput(Constants.Climb.kClimbLimitSwitchPort);
         addChild("LowerClimbLimitSwitch", LowerClimbLimitSwitch);
-        LowerTraverseLimitSwitch = new DigitalInput(Constants.Climb.kTraverseLimitSwitchPort);
-        addChild("LowerTraverseLimitSwitch", LowerTraverseLimitSwitch);
+        // LowerTraverseLimitSwitch = new DigitalInput(Constants.Climb.kTraverseLimitSwitchPort);
+        // addChild("LowerTraverseLimitSwitch", LowerTraverseLimitSwitch);
 
         climbEncoder = climbMotor.getEncoder();
         climbEncoder.setPositionConversionFactor(Constants.Climb.kClimbConversionFactor);
-        traverseEncoder = traverseMotor.getEncoder();
-        traverseEncoder.setPositionConversionFactor(Constants.Climb.kTraverseConversionFactor);
+        // traverseEncoder = traverseMotor.getEncoder();
+        // traverseEncoder.setPositionConversionFactor(Constants.Climb.kTraverseConversionFactor);
     }
 
     @Override
@@ -85,12 +84,12 @@ public class ClimbSystem extends SubsystemBase {
             }
 
         }
-        if (LowerTraverseLimitSwitch.get() == Constants.Climb.kTraverseLimitSwitch) {
+        // if (LowerTraverseLimitSwitch.get() == Constants.Climb.kTraverseLimitSwitch) {
 
-            if (traverseMotor.get() < 0) {
-                traverseMotor.set(0);
-            }
-        }
+        //     if (traverseMotor.get() < 0) {
+        //         traverseMotor.set(0);
+        //     }
+        // }
 
         if (Utilities.IsCloseTo(antidropClimbServo.get(), Constants.Climb.transferLockedServoPosition)) {
             localClimbMotorSpeed = 0;
@@ -98,11 +97,11 @@ public class ClimbSystem extends SubsystemBase {
             localClimbMotorSpeed = 1;
         }
 
-        if (Utilities.IsCloseTo(antidropTraverseServo.get(), Constants.Climb.transferLockedServoPosition)) {
-            localTraverseMotorSpeed = 0;
-        } else {
-            localTraverseMotorSpeed = 1;
-        }
+        // if (Utilities.IsCloseTo(antidropTraverseServo.get(), Constants.Climb.transferLockedServoPosition)) {
+        //     localTraverseMotorSpeed = 0;
+        // } else {
+        //     localTraverseMotorSpeed = 1;
+        // }
 
         if (climbEncoder.getPosition() > Constants.Climb.kClimbHeightlimit) {
 
@@ -110,18 +109,18 @@ public class ClimbSystem extends SubsystemBase {
                 climbMotor.set(0);
             }
         }
-        if (traverseEncoder.getPosition() > Constants.Climb.kTraverseHeightlimit) {
+        // if (traverseEncoder.getPosition() > Constants.Climb.kTraverseHeightlimit) {
 
-            if (traverseMotor.get() > 0) {
-                traverseMotor.set(0);
-            }
-        }
+        //     if (traverseMotor.get() > 0) {
+        //         traverseMotor.set(0);
+        //     }
+        //}
         
     }
 
-    public double getTraversePosition() {
-        return traverseEncoder.getPosition();
-    }
+    // public double getTraversePosition() {
+    //     return traverseEncoder.getPosition();
+    //}
       
     public double getClimbPosition() {
         return climbEncoder.getPosition();
@@ -136,18 +135,18 @@ public class ClimbSystem extends SubsystemBase {
 
     }
 
-    public void lockTraverse(boolean isLocked) {
-        // Ced both locks position and prevent motors from turning
-        if (isLocked) {
-            antidropTraverseServo.set(Constants.Climb.transferLockedServoPosition);
+    // public void lockTraverse(boolean isLocked) {
+    //     // Ced both locks position and prevent motors from turning
+    //     if (isLocked) {
+    //         antidropTraverseServo.set(Constants.Climb.transferLockedServoPosition);
 
-            // climbMotor.set(0);
-        } else {
-            antidropTraverseServo.set(Constants.Climb.transferUnlockedServoPosition);
+    //         // climbMotor.set(0);
+    //     } else {
+    //         antidropTraverseServo.set(Constants.Climb.transferUnlockedServoPosition);
 
-        }
+    //     }
 
-    }
+    // }
 
     public void lockClimber(boolean isLocked) {
 
@@ -161,9 +160,9 @@ public class ClimbSystem extends SubsystemBase {
         }
     }
 
-    public void move(double climbSpeed, double traverseSpeed) {
+     public void move(double climbSpeed, double traverseSpeed) {
         climbMotor.set(climbSpeed * localClimbMotorSpeed);
-        traverseMotor.set(traverseSpeed * localTraverseMotorSpeed);
-    }
+    //     traverseMotor.set(traverseSpeed * localTraverseMotorSpeed);
+     }
 
 }
