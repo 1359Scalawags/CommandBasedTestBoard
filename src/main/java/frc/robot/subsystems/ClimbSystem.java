@@ -13,13 +13,13 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.hal.EncoderJNI;
+//import edu.wpi.first.hal.EncoderJNI;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+//import edu.wpi.first.wpilibj.Encoder;
+//import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.simulation.EncoderSim;
+//import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.simulation.EncoderSim;
 
 public class ClimbSystem extends SubsystemBase {
     private DigitalInput LowerClimbLimitSwitch;
