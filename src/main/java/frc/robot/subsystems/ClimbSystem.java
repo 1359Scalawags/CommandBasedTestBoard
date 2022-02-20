@@ -27,7 +27,7 @@ public class ClimbSystem extends SubsystemBase {
 
     private CANSparkMax climbMotor;
     private Servo antidropClimbServo;
-    private Solenoid climberSolenoid;
+    //private Solenoid climberSolenoid;
     // private CANSparkMax traverseMotor;
     // private Servo antidropTraverseServo;
 
@@ -37,7 +37,7 @@ public class ClimbSystem extends SubsystemBase {
    // private RelativeEncoder traverseEncoder;
 
     // used to turn off motors to prevent unnecessary strain
-    public int localClimbMotorSpeed;
+    public int localClimbMotorMultiplier;
     // public int localTraverseMotorSpeed;
     public ClimbSystem() {
 
@@ -47,8 +47,8 @@ public class ClimbSystem extends SubsystemBase {
         climbMotor.restoreFactoryDefaults();
         climbMotor.setInverted(false);
         climbMotor.setIdleMode(IdleMode.kCoast);
-        climberSolenoid = new Solenoid(Constants.Climb.kClimberSolenoid, PneumaticsModuleType.CTREPCM, 0);
-        addChild("ClimberSolenoid", climberSolenoid);
+        // climberSolenoid = new Solenoid(Constants.Climb.kClimberSolenoid, PneumaticsModuleType.CTREPCM, 0);
+        // addChild("ClimberSolenoid", climberSolenoid);
 
         antidropClimbServo = new Servo(Constants.Climb.kAntiDropClimbServo);
         addChild("AntidropClimbServo", antidropClimbServo);
@@ -78,30 +78,23 @@ public class ClimbSystem extends SubsystemBase {
         // Ced Makes sure the motors don't fry or breack anything when they hit the
         // bottom
         if (LowerClimbLimitSwitch.get() == Constants.PRESSED) {
-            // TODO: figure out wich direction down is and adjust accordingly
+            // TODO: we assume positive motor is up
             if (climbMotor.get() < 0) {
                 climbMotor.set(0);
             }
-
         }
-        // if (LowerTraverseLimitSwitch.get() == Constants.Climb.kTraverseLimitSwitch) {
 
-        //     if (traverseMotor.get() < 0) {
-        //         traverseMotor.set(0);
-        //     }
-        // }
-
-        if (Utilities.IsCloseTo(antidropClimbServo.get(), Constants.Climb.transferLockedServoPosition)) {
-            localClimbMotorSpeed = 0;
+        //This may be the issue. There are really 3 cases
+        // 1) Climber is unlocked and move any direction (OK)
+        // 2) Climber is locked and going down (OK)
+        // 3) Climber is locked and going up (NOT OK)
+        boolean isServoCloseToLockPosition = Utilities.IsCloseTo(antidropClimbServo.get(), Constants.Climb.kClimbServoLockPosition);
+        if (isServoCloseToLockPosition && climbMotor.get() > 0) {
+            localClimbMotorMultiplier = 0;
         } else {
-            localClimbMotorSpeed = 1;
+            localClimbMotorMultiplier = 1;
         }
 
-        // if (Utilities.IsCloseTo(antidropTraverseServo.get(), Constants.Climb.transferLockedServoPosition)) {
-        //     localTraverseMotorSpeed = 0;
-        // } else {
-        //     localTraverseMotorSpeed = 1;
-        // }
 
         if (climbEncoder.getPosition() > Constants.Climb.kClimbHeightlimit) {
 
@@ -109,8 +102,17 @@ public class ClimbSystem extends SubsystemBase {
                 climbMotor.set(0);
             }
         }
+        // if (LowerTraverseLimitSwitch.get() == Constants.Climb.kTraverseLimitSwitch) {
+        //     if (traverseMotor.get() < 0) {
+        //         traverseMotor.set(0);
+        //     }
+        // }
+        // if (Utilities.IsCloseTo(antidropTraverseServo.get(), Constants.Climb.transferLockedServoPosition)) {
+        //     localTraverseMotorSpeed = 0;
+        // } else {
+        //     localTraverseMotorSpeed = 1;
+        // }
         // if (traverseEncoder.getPosition() > Constants.Climb.kTraverseHeightlimit) {
-
         //     if (traverseMotor.get() > 0) {
         //         traverseMotor.set(0);
         //     }
@@ -148,7 +150,7 @@ public class ClimbSystem extends SubsystemBase {
 
     // }
 
-    public void lockClimber(boolean isLocked) {
+    public void setClimberLock(boolean isLocked) {
 
         if (isLocked == true) {
             antidropClimbServo.set(Constants.Climb.kClimbServoLockPosition);
@@ -161,7 +163,7 @@ public class ClimbSystem extends SubsystemBase {
     }
 
      public void move(double climbSpeed, double traverseSpeed) {
-        climbMotor.set(climbSpeed * localClimbMotorSpeed);
+        climbMotor.set(climbSpeed * localClimbMotorMultiplier);
     //     traverseMotor.set(traverseSpeed * localTraverseMotorSpeed);
      }
 
