@@ -6,6 +6,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Climb.LockClimber;
 import frc.robot.commands.Climb.LowerClimber;
 import frc.robot.commands.Climb.ManuelClimber;
+import frc.robot.commands.Climb.UnlockClimber;
 import frc.robot.commands.Climb.UnlockTraverse;
 import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.commands.Drive.ReverseDrive;
@@ -149,8 +150,8 @@ public class RobotContainer {
 
     final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
     if (TESTING_CLIMBER) {
-      unlockClimberBtn.whenPressed(new UnlockTraverse(m_climbSystem), true);
-      SmartDashboard.putData("unlockClimberBtn", new UnlockTraverse(m_climbSystem));
+      unlockClimberBtn.whenPressed(new UnlockClimber(m_climbSystem), true);
+      SmartDashboard.putData("unlockClimberBtn", new UnlockClimber(m_climbSystem));
     }
 
     final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
