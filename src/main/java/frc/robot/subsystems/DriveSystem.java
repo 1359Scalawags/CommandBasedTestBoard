@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.REVLibError;
@@ -58,6 +59,7 @@ public class DriveSystem extends SubsystemBase {
        
         leftEncoder = leftMotor.getEncoder();
         rightEncoder = rightMotor.getEncoder();
+        SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
     }
 
     //CED even more gyro stuff
@@ -123,6 +125,11 @@ public void driveBackward(double speed, double targetHeading) {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        double[] newvalues = SmartDashboard.getNumberArray("Gyro PID", new double[]{0,0,0});
+        gyroControl.setP(newvalues[0]);
+        gyroControl.setI(newvalues[1]);
+        gyroControl.setD(newvalues[2]);
+
 
     }
 
