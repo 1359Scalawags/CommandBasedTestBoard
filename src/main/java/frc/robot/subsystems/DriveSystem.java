@@ -59,9 +59,10 @@ public class DriveSystem extends SubsystemBase {
        
         leftEncoder = leftMotor.getEncoder();
         rightEncoder = rightMotor.getEncoder();
-        SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
 
         gyroControl = new PIDController(Constants.Drive.gyrokP, Constants.Drive.gyrokI, Constants.Drive.gyrokD);
+        //SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
+        SmartDashboard.putData("Gyro Control", gyroControl);
     }
 
     //CED even more gyro stuff
@@ -127,10 +128,10 @@ public void driveBackward(double speed, double targetHeading) {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        double[] newvalues = SmartDashboard.getNumberArray("Gyro PID", new double[]{0,0,0});
-        gyroControl.setP(newvalues[0]);
-        gyroControl.setI(newvalues[1]);
-        gyroControl.setD(newvalues[2]);
+        // double[] newvalues = SmartDashboard.getNumberArray("Gyro PID", new double[]{0,0,0});
+        // gyroControl.setP(newvalues[0]);
+        // gyroControl.setI(newvalues[1]);
+        // gyroControl.setD(newvalues[2]);
 
 
     }
