@@ -54,15 +54,18 @@ public class DriveSystem extends SubsystemBase {
 
         driveGyro = new ADXRS450_Gyro();
         addChild("Gyro", driveGyro);
-        //driveGyro.setSensitivity(0.007);
+        // driveGyro.setSensitivity(0.007);
         driveGyro.calibrate();
        
         leftEncoder = leftMotor.getEncoder();
         rightEncoder = rightMotor.getEncoder();
 
         gyroControl = new PIDController(Constants.Drive.gyrokP, Constants.Drive.gyrokI, Constants.Drive.gyrokD);
-        //SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
-        SmartDashboard.putData("Gyro Control", gyroControl);
+        // SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
+        // SmartDashboard.putData("Gyro Control", gyroControl);
+        SmartDashboard.putNumber("Gyro P", gyroControl.getP());
+        SmartDashboard.putNumber("Gyro I", gyroControl.getI());
+        SmartDashboard.putNumber("Gyro D", gyroControl.getD());
     }
 
     //CED even more gyro stuff
@@ -129,10 +132,9 @@ public void driveBackward(double speed, double targetHeading) {
     public void periodic() {
         // This method will be called once per scheduler run
         // double[] newvalues = SmartDashboard.getNumberArray("Gyro PID", new double[]{0,0,0});
-        // gyroControl.setP(newvalues[0]);
-        // gyroControl.setI(newvalues[1]);
-        // gyroControl.setD(newvalues[2]);
-
+        gyroControl.setP(SmartDashboard.getNumber("Gyro P", 0));
+        gyroControl.setI(SmartDashboard.getNumber("Gyro I", 0));
+        gyroControl.setD(SmartDashboard.getNumber("Gyro D", 0));
 
     }
 
