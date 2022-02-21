@@ -39,29 +39,29 @@ public class Constants {
     public static final class Climb {
         //Climb Motors and Servos (Solenoids too)
         public static final int kClimbMotor = 23;
-        public static final int kTraverseMotor = 7;
+        //public static final int kTraverseMotor = 7;
         public static final int kAntiDropClimbServo = 9;
-        public static final int kAntiDropTraverseServo = 1;
+        //public static final int kAntiDropTraverseServo = 1;
         public static final int kClimberSolenoid = 9;
         //Climb Motor Speeds
         public static final float kClimbMotorSpeed = 0.5f;
-        public static final float kTraverseMotorSpeed = 0.5f;
+        //public static final float kTraverseMotorSpeed = 0.5f;
         //gonna need actual values here
-        public static final float transferLockedServoPosition = 1f;
-        public static final float transferUnlockedServoPosition = 1f;
-        public static final float kClimbServoLockPosition = 1.0f;
-        public static final float kClimbServoUnlockPosition = 2.0f;
+        //public static final float transferLockedServoPosition = 0f;
+        //public static final float transferUnlockedServoPosition = 1f;
+        public static final float kClimbServoLockPosition = 0f;
+        public static final float kClimbServoUnlockPosition = 1f;
 
 
         public static final boolean kClimbLimitSwitch = true;
         public static final int kClimbLimitSwitchPort = 7;
-        public static final boolean kTraverseLimitSwitch = true;
-        public static final int kTraverseLimitSwitchPort = 4;
+        //public static final boolean kTraverseLimitSwitch = true;
+        //public static final int kTraverseLimitSwitchPort = 4;
         public static final double kClimbConversionFactor = 1;
-        public static final double kTraverseConversionFactor = 1;
+        //public static final double kTraverseConversionFactor = 1;
        
         public static final double kClimbHeightlimit = 20;
-        public static final double kTraverseHeightlimit = 20;
+        //public static final double kTraverseHeightlimit = 20;
     }
 
     public static final class BallHandling {
