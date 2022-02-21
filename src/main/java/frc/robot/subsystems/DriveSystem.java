@@ -61,6 +61,7 @@ public class DriveSystem extends SubsystemBase {
         rightEncoder = rightMotor.getEncoder();
 
         gyroControl = new PIDController(Constants.Drive.gyrokP, Constants.Drive.gyrokI, Constants.Drive.gyrokD);
+        gyroControl.setIntegratorRange(-Constants.Drive.MaxIntegralRange, Constants.Drive.MaxIntegralRange);
         // SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
         // SmartDashboard.putData("Gyro Control", gyroControl);
         SmartDashboard.putNumber("Gyro P", gyroControl.getP()*1000);

@@ -25,8 +25,8 @@ public class Constants {
         public static final double PID_Iz = 0;
         public static final double PID_Ff = 0;
         //Gyro varibles
-        public static final double gyrokP =0.1;
-        public static final double gyrokI =0.0;
+        public static final double gyrokP =0.05;
+        public static final double gyrokI =0.0000001;
         public static final double gyrokD =0.0;
         public static final double gyrokIz =0.0;
         public static final double gyrokFf =0.0;
@@ -34,6 +34,8 @@ public class Constants {
         public static final double AutoStraightSpeed = 1;
 
         public static final double maxTurnSpeed = 0.5;
+
+        public static final double MaxIntegralRange = 0.25;
     }
 
     public static final class Climb {

@@ -50,6 +50,7 @@ public class TurnByAngle extends CommandBase {
     public boolean isFinished() {
         if(Utilities.IsCloseTo(m_driveSystem.getAngle(), turnAngle+originalAngle, 3)) {
             if(correctTimer.get() > 1) {
+                m_driveSystem.stop();
                 return true;
             }
             return false;
