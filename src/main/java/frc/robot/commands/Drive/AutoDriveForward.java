@@ -36,7 +36,8 @@ public class AutoDriveForward extends CommandBase {
     @Override
     public void execute() {
         current = m_DriveSystem.getAverageDistance();
-        m_DriveSystem.driveForward(Drive.AutoStraightSpeed, target);
+        // m_DriveSystem.driveForward(Drive.AutoStraightSpeed, target);
+        m_DriveSystem.arcadeDrive(Drive.AutoStraightSpeed, 0.5, target);
     }
 
     // Make this return true when this Command no longer needs to run execute()

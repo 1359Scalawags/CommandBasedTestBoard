@@ -34,7 +34,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 
-  public final static boolean TESTING_CLIMBER = true;
+  public final static boolean TESTING_CLIMBER = false;
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 
@@ -126,8 +126,8 @@ public class RobotContainer {
 
     final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
     if (!TESTING_CLIMBER) {
-      moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 20, 0.25), true);
-      SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 20, 0.25));
+      moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 100, 0.25), true);
+      SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 100, 0.25));
     }
 
     final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kX.value); // TODO:

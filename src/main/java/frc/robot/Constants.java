@@ -26,10 +26,10 @@ public class Constants {
         public static final double PID_Ff = 0;
         //Gyro varibles
         public static final double gyrokP =0.1;
-        public static final double gyrokI =0.1;
-        public static final double gyrokD =0.1;
-        public static final double gyrokIz =0.1;
-        public static final double gyrokFf =0.1;
+        public static final double gyrokI =0.0;
+        public static final double gyrokD =0.0;
+        public static final double gyrokIz =0.0;
+        public static final double gyrokFf =0.0;
         
         public static final double AutoStraightSpeed = 1;
 
