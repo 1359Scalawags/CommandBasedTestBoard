@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Utilities;
 import frc.robot.subsystems.DriveSystem;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -13,6 +14,7 @@ public class TurnByAngle extends CommandBase {
     private final DriveSystem m_driveSystem;
     private double turnAngle;
     private double originalAngle;
+    private Timer correctTimer;
 
     public TurnByAngle(DriveSystem subsystem, double turnAngle) {
 
@@ -20,6 +22,8 @@ public class TurnByAngle extends CommandBase {
         addRequirements(m_driveSystem);
         this.turnAngle = turnAngle;
 
+        correctTimer = new Timer();
+        correctTimer.reset();
 
     }
 
@@ -27,12 +31,13 @@ public class TurnByAngle extends CommandBase {
     @Override
     public void initialize() {
         originalAngle = m_driveSystem.getAngle();
+        correctTimer.start();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_driveSystem.arcadeDrive(Constants.Drive.kBaseDriveSpeed, Constants.Drive.maxTurnSpeed, turnAngle+originalAngle);
+        m_driveSystem.arcadeDrive(0, Constants.Drive.maxTurnSpeed, turnAngle+originalAngle);
     }
 
     // Called once the command ends or is interrupted.
@@ -43,10 +48,14 @@ public class TurnByAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(Utilities.IsCloseTo(m_driveSystem.getAngle(), turnAngle+originalAngle, 3))
-            return true;
-        else
+        if(Utilities.IsCloseTo(m_driveSystem.getAngle(), turnAngle+originalAngle, 3)) {
+            if(correctTimer.get() > 1) {
+                return true;
+            }
             return false;
+        }
+        correctTimer.reset();    
+        return false;
     }
 
     @Override
