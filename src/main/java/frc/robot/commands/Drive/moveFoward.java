@@ -45,7 +45,7 @@ public class moveFoward extends CommandBase {
     @Override
     public void execute() {
         //m_driveSystem.driveForward(speed, target);
-        m_driveSystem.arcadeDrive(Drive.AutoStraightSpeed, 0.5, target);
+        m_driveSystem.arcadeDrive(speed, 0.5, target);
         current = m_driveSystem.getAverageDistance();
         
     }
