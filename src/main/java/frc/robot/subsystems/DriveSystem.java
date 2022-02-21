@@ -43,7 +43,7 @@ public class DriveSystem extends SubsystemBase {
         rightMotor = new CANSparkMax(Constants.Drive.kRightFrontPort, MotorType.kBrushless);
 
         rightMotor.restoreFactoryDefaults();
-        rightMotor.setInverted(false);
+        rightMotor.setInverted(true);
         rightMotor.setIdleMode(IdleMode.kCoast);
 
         differentialDrive = new DifferentialDrive(leftMotor, rightMotor);
