@@ -129,7 +129,7 @@ public class RobotContainer {
       SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 100, 0.25));
     }
 
-    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kX.value);
+    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);
     turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, 30));
     SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, 30));
 

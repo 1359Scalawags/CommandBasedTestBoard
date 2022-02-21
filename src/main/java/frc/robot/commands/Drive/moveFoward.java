@@ -2,6 +2,7 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.Drive;
 // import edu.wpi.first.wpilibj2.command.Subsystem;
 // import frc.robot.Constants;
 // import frc.robot.Robot;
@@ -43,8 +44,10 @@ public class moveFoward extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_driveSystem.driveForward(speed, target);
+        //m_driveSystem.driveForward(speed, target);
+        m_driveSystem.arcadeDrive(Drive.AutoStraightSpeed, 0.5, target);
         current = m_driveSystem.getAverageDistance();
+        
     }
 
     // Called once the command ends or is interrupted.

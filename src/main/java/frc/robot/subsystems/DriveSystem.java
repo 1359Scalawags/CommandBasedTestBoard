@@ -60,6 +60,8 @@ public class DriveSystem extends SubsystemBase {
         leftEncoder = leftMotor.getEncoder();
         rightEncoder = rightMotor.getEncoder();
         SmartDashboard.putNumberArray("Gyro PID", new double[]{gyroControl.getP(), gyroControl.getI(), gyroControl.getD()});
+
+        gyroControl = new PIDController(Constants.Drive.gyrokP, Constants.Drive.gyrokI, Constants.Drive.gyrokD);
     }
 
     //CED even more gyro stuff
