@@ -4,6 +4,8 @@ package frc.robot;
 import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Ball.LoadBall;
+import frc.robot.commands.Ball.ReverseBall;
+import frc.robot.commands.Ball.ShootBall;
 import frc.robot.commands.Climb.LockClimber;
 import frc.robot.commands.Climb.LowerClimber;
 import frc.robot.commands.Climb.ManuelClimber;
@@ -132,7 +134,7 @@ public class RobotContainer {
     templateBtn.whenPressed(new AutonomousCommand(), true);
     SmartDashboard.putData("TemplateBtn", new AutonomousCommand());
 
-    final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
+    final JoystickButton moveForwardBtn = new JoystickButton(driverController, XboxController.Button.kB.value);
     final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);
     final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
     
@@ -150,7 +152,7 @@ public class RobotContainer {
     final JoystickButton lockClimberBtn = new JoystickButton(driverController, XboxController.Button.kX.value);
     final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
     final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
     
     if (TEST_MODE == TestModes.Climb) {
       lockClimberBtn.whenPressed(new LockClimber(m_climbSystem), true);
@@ -166,10 +168,19 @@ public class RobotContainer {
       SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
 
-    final JoystickButton loadBallBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
-    if(TEST_MODE == TestModes.BallHandle) {
+    final JoystickButton loadBallBtn = new JoystickButton(assistController, XboxController.Button.kX.value);
+    final JoystickButton reverseBallBtn = new JoystickButton(assistController, XboxController.Button.kY.value);
+    final JoystickButton shootBallBtn = new JoystickButton(assistController, XboxController.Button.kStart.value);
+
+    if(TEST_MODE == TestModes.BallHandle){
       loadBallBtn.whenPressed(new LoadBall(m_ballHandlingSystem), true);
       SmartDashboard.putData("loadBallBtn", new LoadBall(m_ballHandlingSystem));
+
+      reverseBallBtn.whenPressed(new ReverseBall(m_ballHandlingSystem), true);
+      SmartDashboard.putData("reverseBallBtn", new ReverseBall(m_ballHandlingSystem));
+
+      shootBallBtn.whenPressed(new ShootBall(m_ballHandlingSystem), true);
+      SmartDashboard.putData("shootBallBtn", new ShootBall(m_ballHandlingSystem));
     }
 
   }
