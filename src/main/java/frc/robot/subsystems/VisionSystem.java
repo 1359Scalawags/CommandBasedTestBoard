@@ -11,6 +11,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class VisionSystem extends SubsystemBase {
 
+
+   
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
