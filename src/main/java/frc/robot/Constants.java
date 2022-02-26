@@ -68,10 +68,9 @@ public class Constants {
 
     public static final class BallHandling {
         //Ball Handling Motors
-        public static final int kLoadMotor1 = 4;
-        public static final int kLoadMotor2 = 9;
-        public static final int kStagingMotor = 6;
-        public static final int kShootMotor = 5;
+        public static final int kLoadMotor1 = 1;
+        public static final int kStagingMotor = 23;
+        public static final int kShootMotor = 7;
         //Ball Motor Speeds
         public static final float kLoadMotorsSpeed = 0.5f;
         public static final float kStagingMotorSpeed = 0.5f;
