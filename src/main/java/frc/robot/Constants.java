@@ -9,8 +9,15 @@ public class Constants {
     public static final boolean PRESSED = true;
     public static final boolean NOTPRESSED = false;
     public static final double TOLERANCE = .1;
+   
+   
 
     public static final class Drive {
+
+
+        public static final double AutoMotorSpeed = 1;
+        public static final double AutoMotorDistance = 1;
+        public static final double AngleTurnBy = 0;
         //Drive motor ports
         public static final int kLeftFrontPort = 21;
         public static final int kRightFrontPort = 23;
