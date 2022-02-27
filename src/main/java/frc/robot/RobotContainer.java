@@ -12,6 +12,7 @@ import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.commands.Drive.ReverseDrive;
 import frc.robot.commands.Drive.TurnByAngle;
 import frc.robot.commands.Drive.moveFoward;
+import frc.robot.commands.Ball.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,6 +44,7 @@ public class RobotContainer {
   public DriveSystem m_driveSystem;
   public final VisionSystem m_visionSystem = new VisionSystem();
   public ClimbSystem m_climbSystem;
+  public BallHandlingSystem m_ballhandlingsystem;
 
   // Joysticks
   private final XboxController assistController = new XboxController(1);
@@ -161,6 +163,10 @@ public class RobotContainer {
       lowerClimberBtn.whenPressed(new LowerClimber(m_climbSystem), true);
       SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
+    
+    final JoystickButton shootBallBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    shootBallBtn.whenPressed(new ShootBall(m_ballhandlingsystem), true);               
+    SmartDashboard.putData("lowerClimberBtn", new ShootBall(m_ballhandlingsystem));
 
   }
 
