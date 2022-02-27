@@ -4,6 +4,7 @@ import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Ball.LoadBall;
 import frc.robot.commands.Ball.ShootBall;
+import frc.robot.commands.Ball.SequenceShot;
 import frc.robot.commands.Climb.LockClimber;
 import frc.robot.commands.Climb.LowerClimber;
 import frc.robot.commands.Climb.ManuelClimber;
@@ -133,54 +134,56 @@ public class RobotContainer {
     SmartDashboard.putData("TemplateBtn", new AutonomousCommand());
 
     final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
+    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);   
+    final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
+     
     if (TEST_MODE == TestModes.Drive) {
       moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 100, 0.25), true);
       SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 100, 0.25));
-    }
 
-    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);
-    turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, 30));
-    SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, 30));
+      turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, 30));
+      SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, 30));
 
-    final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
-    if (TEST_MODE == TestModes.Drive) {
       reverseDriveBtn.whenPressed(new ReverseDrive(m_driveSystem), true);
       SmartDashboard.putData("reverseDriveBtn", new ReverseDrive(m_driveSystem));
     }
 
     final JoystickButton lockClimberBtn = new JoystickButton(driverController, XboxController.Button.kX.value);
+    final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
+    final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+
     if (TEST_MODE == TestModes.Climb) {
       lockClimberBtn.whenPressed(new LockClimber(m_climbSystem), true);
       SmartDashboard.putData("lockClimberBtn", new LockClimber(m_climbSystem));
-    }
 
-    final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
-    if (TEST_MODE == TestModes.Climb) {
       unlockClimberBtn.whenPressed(new UnlockClimber(m_climbSystem), true);
       SmartDashboard.putData("unlockClimberBtn", new UnlockClimber(m_climbSystem));
-    }
 
-    final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    if (TEST_MODE == TestModes.Climb) {
       raiseClimberBtn.whenPressed(new ManuelClimber(m_climbSystem), true);
       SmartDashboard.putData("raiseClimberBtn", new ManuelClimber(m_climbSystem));
-    }
 
-    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    if (TEST_MODE == TestModes.Climb) {
       lowerClimberBtn.whenPressed(new LowerClimber(m_climbSystem), true);
       SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
     
     final JoystickButton shootBallBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    shootBallBtn.whenPressed(new ShootBall(m_ballHandlingSystem), true);               
-    SmartDashboard.putData("lowerClimberBtn", new ShootBall(m_ballHandlingSystem));
-
     final JoystickButton loadBallBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
+    final JoystickButton sequenceShotBtn = new JoystickButton(assistController, XboxController.Button.kA.value);    
+
     if(TEST_MODE == TestModes.BallHandle) {
       loadBallBtn.whenPressed(new LoadBall(m_ballHandlingSystem), true);
       SmartDashboard.putData("loadBallBtn", new LoadBall(m_ballHandlingSystem));
+
+      sequenceShotBtn.whenPressed(new SequenceShot(m_ballHandlingSystem), true);
+      SmartDashboard.putData("loadBallBtn", new SequenceShot(m_ballHandlingSystem));   
+      
+      shootBallBtn.whenPressed(new ShootBall(m_ballHandlingSystem), true);               
+      SmartDashboard.putData("lowerClimberBtn", new ShootBall(m_ballHandlingSystem));
     }
+
+
+
 
   }
 
