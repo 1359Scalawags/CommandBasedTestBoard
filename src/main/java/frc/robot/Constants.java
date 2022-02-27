@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.Timer; //TODO: Do we need to import a timer or not?
 
 public class Constants {
     
-    public static final boolean PRESSED = false;
-    public static final boolean NOTPRESSED = true;
+    public static final boolean PRESSED = true;
+    public static final boolean NOTPRESSED = false;
     public static final double TOLERANCE = .1;
 
     public static final class Drive {
         //Drive motor ports
-        public static final int kLeftFrontPort = 1;
+        public static final int kLeftFrontPort = 21;
         public static final int kRightFrontPort = 23;
         //Drive motor speeds
         public static final float kBoostSpeed = 0.6f;
@@ -68,9 +68,9 @@ public class Constants {
 
     public static final class BallHandling {
         //Ball Handling Motors
-        public static final int kLoadMotor1 = 1;
+        public static final int kLoadMotor1 = 7;
         public static final int kStagingMotor = 23;
-        public static final int kShootMotor = 7;
+        public static final int kShootMotor = 21;
         //Ball Motor Speeds
         public static final float kLoadMotorsSpeed = 0.5f;
         public static final float kStagingMotorSpeed = 0.5f;
@@ -81,7 +81,7 @@ public class Constants {
         public static final float shootTimerLength = 3f; //TODO: Change this later if needed
         public static final float reverseballTimer = 5f;
 
-        public static final boolean BALLPRESENT = false;
+        public static final boolean BALLPRESENT = true;
 
         public static final double kP = 6e-5; 
         public static final double kI = 0;

@@ -3,6 +3,7 @@ package frc.robot;
 import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
 import frc.robot.commands.Ball.LoadBall;
+import frc.robot.commands.Ball.ShootBall;
 import frc.robot.commands.Climb.LockClimber;
 import frc.robot.commands.Climb.LowerClimber;
 import frc.robot.commands.Climb.ManuelClimber;
@@ -170,6 +171,10 @@ public class RobotContainer {
       lowerClimberBtn.whenPressed(new LowerClimber(m_climbSystem), true);
       SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
+    
+    final JoystickButton shootBallBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    shootBallBtn.whenPressed(new ShootBall(m_ballHandlingSystem), true);               
+    SmartDashboard.putData("lowerClimberBtn", new ShootBall(m_ballHandlingSystem));
 
     final JoystickButton loadBallBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
     if(TEST_MODE == TestModes.BallHandle) {
