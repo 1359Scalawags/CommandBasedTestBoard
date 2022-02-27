@@ -3,7 +3,6 @@ package frc.robot;
 
 import frc.robot.Other.ManualOther;
 import frc.robot.commands.*;
-import frc.robot.commands.Ball.LoadBall;
 import frc.robot.commands.Climb.LockClimber;
 import frc.robot.commands.Climb.LowerClimber;
 import frc.robot.commands.Climb.ManuelClimber;
@@ -13,7 +12,6 @@ import frc.robot.commands.Drive.ManualDrive;
 import frc.robot.commands.Drive.ReverseDrive;
 import frc.robot.commands.Drive.TurnByAngle;
 import frc.robot.commands.Drive.moveFoward;
-import frc.robot.commands.Vision.UpdateTargets;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,12 +34,7 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 
-  public static enum TestModes {
-    Drive,
-    Climb,
-    BallHandle
-  }
-  public final static TestModes TEST_MODE = TestModes.BallHandle;
+  public final static boolean TESTING_CLIMBER = false;
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 
@@ -50,7 +43,6 @@ public class RobotContainer {
   public DriveSystem m_driveSystem;
   public final VisionSystem m_visionSystem = new VisionSystem();
   public ClimbSystem m_climbSystem;
-  public BallHandlingSystem m_ballHandlingSystem;
 
   // Joysticks
   private final XboxController assistController = new XboxController(1);
@@ -64,24 +56,22 @@ public class RobotContainer {
    */
   private RobotContainer() {
 
-    if (TEST_MODE == TestModes.Climb) {
+    if (TESTING_CLIMBER) {
       m_climbSystem = new ClimbSystem();
-    } else if(TEST_MODE == TestModes.Drive) {
-      m_driveSystem = new DriveSystem();
     } else {
-      m_ballHandlingSystem = new BallHandlingSystem();
+      m_driveSystem = new DriveSystem();
     }
     // Smartdashboard Subsystems
 
     // SmartDashboard Buttons
-    if (TEST_MODE == TestModes.Climb) {
+    if (TESTING_CLIMBER) {
       SmartDashboard.putData("LockClimber", new LockClimber(m_climbSystem));
       SmartDashboard.putData("RaiseClimber", new ManuelClimber(m_climbSystem));
       SmartDashboard.putData("LowerClimber", new LowerClimber(m_climbSystem));
     }
 
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-    if (TEST_MODE == TestModes.Drive) {
+    if (!TESTING_CLIMBER) {
       SmartDashboard.putData("ManualDrive", new ManualDrive(m_driveSystem));
     }
 
@@ -92,7 +82,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure default commands
-    if (TEST_MODE == TestModes.Drive) {
+    if (!TESTING_CLIMBER) {
       m_driveSystem.setDefaultCommand(new ManualDrive(m_driveSystem));
     }
    
@@ -133,43 +123,43 @@ public class RobotContainer {
     SmartDashboard.putData("TemplateBtn", new AutonomousCommand());
 
     final JoystickButton moveForwardBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
-    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);
-    final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
-    
-    if (TEST_MODE == TestModes.Drive) {
+    if (!TESTING_CLIMBER) {
       moveForwardBtn.whenPressed(new moveFoward(m_driveSystem, 100, 0.25), true);
       SmartDashboard.putData("moveForwardBtn", new moveFoward(m_driveSystem, 100, 0.25));
+    }
 
-      turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, 30));
-      SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, 30));
+    final JoystickButton turnByAngleBtn = new JoystickButton(driverController, XboxController.Button.kY.value);
+    turnByAngleBtn.whenPressed(new TurnByAngle(m_driveSystem, 30));
+    SmartDashboard.putData("turnByAngleBtn", new TurnByAngle(m_driveSystem, 30));
 
+    final JoystickButton reverseDriveBtn = new JoystickButton(driverController, XboxController.Button.kBack.value);
+    if (!TESTING_CLIMBER) {
       reverseDriveBtn.whenPressed(new ReverseDrive(m_driveSystem), true);
       SmartDashboard.putData("reverseDriveBtn", new ReverseDrive(m_driveSystem));
     }
 
     final JoystickButton lockClimberBtn = new JoystickButton(driverController, XboxController.Button.kX.value);
-    final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
-    final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
-    
-    if (TEST_MODE == TestModes.Climb) {
+    if (TESTING_CLIMBER) {
       lockClimberBtn.whenPressed(new LockClimber(m_climbSystem), true);
       SmartDashboard.putData("lockClimberBtn", new LockClimber(m_climbSystem));
-
-      unlockClimberBtn.whenPressed(new UnlockClimber(m_climbSystem), true);
-      SmartDashboard.putData("unlockClimberBtn", new UnlockClimber(m_climbSystem));
-
-      raiseClimberBtn.whenPressed(new ManuelClimber(m_climbSystem), true);
-      SmartDashboard.putData("raiseClimberBtn", new ManuelClimber(m_climbSystem));
-
-      lowerClimberBtn.whenPressed(new LowerClimber(m_climbSystem), true);
-      SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
 
-    final JoystickButton loadBallBtn = new JoystickButton(assistController, XboxController.Button.kB.value);
-    if(TEST_MODE == TestModes.BallHandle) {
-      loadBallBtn.whenPressed(new LoadBall(m_ballHandlingSystem), true);
-      SmartDashboard.putData("loadBallBtn", new LoadBall(m_ballHandlingSystem));
+    final JoystickButton unlockClimberBtn = new JoystickButton(driverController, XboxController.Button.kA.value);
+    if (TESTING_CLIMBER) {
+      unlockClimberBtn.whenPressed(new UnlockClimber(m_climbSystem), true);
+      SmartDashboard.putData("unlockClimberBtn", new UnlockClimber(m_climbSystem));
+    }
+
+    final JoystickButton raiseClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    if (TESTING_CLIMBER) {
+      raiseClimberBtn.whenPressed(new ManuelClimber(m_climbSystem), true);
+      SmartDashboard.putData("raiseClimberBtn", new ManuelClimber(m_climbSystem));
+    }
+
+    final JoystickButton lowerClimberBtn = new JoystickButton(assistController, XboxController.Button.kA.value);
+    if (TESTING_CLIMBER) {
+      lowerClimberBtn.whenPressed(new LowerClimber(m_climbSystem), true);
+      SmartDashboard.putData("lowerClimberBtn", new LowerClimber(m_climbSystem));
     }
 
   }
