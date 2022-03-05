@@ -1,0 +1,31 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [23]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/ClimbSystem": "Subsystem",
+      "/LiveWindow/ClimbSystem/LowerClimbLimitSwitch": "Digital Input",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/SparkMax-23[23]": "Motor Controller",
+      "/LiveWindow/VisionSystem": "Subsystem",
+      "/SmartDashboard/Auto Mode": "String Chooser",
+      "/SmartDashboard/Autonomous Command": "Command",
+      "/SmartDashboard/LockClimber": "Command",
+      "/SmartDashboard/LowerClimber": "Command",
+      "/SmartDashboard/RaiseClimber": "Command",
+      "/SmartDashboard/TemplateBtn": "Command",
+      "/SmartDashboard/lockClimberBtn": "Command",
+      "/SmartDashboard/lowerClimberBtn": "Command",
+      "/SmartDashboard/raiseClimberBtn": "Command",
+      "/SmartDashboard/unlockClimberBtn": "Command"
+    }
+  }
+}

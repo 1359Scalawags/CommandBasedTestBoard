@@ -24,7 +24,8 @@ public class SendableCANSparkMax extends CANSparkMax implements Sendable {
         builder.setActuator(true);
         builder.setSafeState(this::stopMotor);
         builder.addDoubleProperty("Value", this::get, this::set);
-        builder.addDoubleProperty("RPM(ReadOnly)", this.encoder::getVelocity, null);
+        builder.addDoubleProperty("Current RPM", this.encoder::getVelocity, null);
+        builder.addDoubleProperty("Current Position", this.encoder::getPosition, null);
     }
     
 }
