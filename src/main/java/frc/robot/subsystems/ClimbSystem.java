@@ -44,7 +44,7 @@ public class ClimbSystem extends SubsystemBase {
     public ClimbSystem() {
 
 
-        climbMotor =new SendableCANSparkMax(Constants.Climb.kClimbMotor, MotorType.kBrushless);
+        climbMotor = new SendableCANSparkMax(Constants.Climb.kClimbMotor, MotorType.kBrushless, this);
 
         climbMotor.restoreFactoryDefaults();
         climbMotor.setInverted(false);
