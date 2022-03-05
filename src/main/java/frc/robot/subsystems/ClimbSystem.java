@@ -12,12 +12,14 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.extensions.SendableCANSparkMax;
 
 //import edu.wpi.first.hal.EncoderJNI;
 import edu.wpi.first.wpilibj.DigitalInput;
 //import edu.wpi.first.wpilibj.Encoder;
 //import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Servo;
+
 //import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.simulation.EncoderSim;
 
@@ -25,7 +27,7 @@ public class ClimbSystem extends SubsystemBase {
     private DigitalInput LowerClimbLimitSwitch;
     // private DigitalInput LowerTraverseLimitSwitch;
 
-    private CANSparkMax climbMotor;
+    private SendableCANSparkMax climbMotor;
     private Servo antidropClimbServo;
     //private Solenoid climberSolenoid;
     // private CANSparkMax traverseMotor;
@@ -42,7 +44,7 @@ public class ClimbSystem extends SubsystemBase {
     public ClimbSystem() {
 
 
-        climbMotor = new CANSparkMax(Constants.Climb.kClimbMotor, MotorType.kBrushless);
+        climbMotor =new SendableCANSparkMax(Constants.Climb.kClimbMotor, MotorType.kBrushless);
 
         climbMotor.restoreFactoryDefaults();
         climbMotor.setInverted(false);
@@ -56,7 +58,7 @@ public class ClimbSystem extends SubsystemBase {
         // antidropTraverseServo = new Servo(Constants.Climb.kAntiDropTraverseServo);
         // addChild("AntidropTraverseServo", antidropTraverseServo);
 
-        // traverseMotor = new CANSparkMax(Constants.Climb.kTraverseMotor, MotorType.kBrushless);
+        // traverseMotor =new SendableCANSparkMax(Constants.Climb.kTraverseMotor, MotorType.kBrushless);
 
         // traverseMotor.restoreFactoryDefaults();
         // traverseMotor.setInverted(false);

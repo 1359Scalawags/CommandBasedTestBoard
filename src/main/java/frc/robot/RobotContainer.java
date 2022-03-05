@@ -42,7 +42,7 @@ public class RobotContainer {
     Climb,
     BallHandle
   }
-  public final static TestModes TEST_MODE = TestModes.BallHandle;
+  public final static TestModes TEST_MODE = TestModes.Climb;
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 

@@ -18,6 +18,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import frc.robot.extensions.SendableCANSparkMax;
 
 public class BallHandlingSystem extends SubsystemBase {
 
@@ -30,7 +31,7 @@ public class BallHandlingSystem extends SubsystemBase {
     private CANSparkMax stagingMotor;
 
 
-    private CANSparkMax shootMotor;
+    private SendableCANSparkMax shootMotor;
     private RelativeEncoder shootEncoder;
     private SparkMaxPIDController shootController;
 
@@ -41,14 +42,14 @@ public class BallHandlingSystem extends SubsystemBase {
     public BallHandlingSystem() {
 
         //! changed to Spark for test board
-        //loadMotor1 = new CANSparkMax(Constants.BallHandling.kLoadMotor1, MotorType.kBrushless);
+        //loadMotor1 =new SendableCANSparkMax(Constants.BallHandling.kLoadMotor1, MotorType.kBrushless);
         loadMotor1 = new Spark(Constants.BallHandling.kLoadMotor1);
         // loadMotor1.restoreFactoryDefaults();
         // loadMotor1.setInverted(false);
         // loadMotor1.setIdleMode(IdleMode.kCoast);
 
         //! removed 2nd motor for test board
-        // loadMotor2 = new CANSparkMax(Constants.BallHandling.kLoadMotor2, MotorType.kBrushless);
+        // loadMotor2 =new SendableCANSparkMax(Constants.BallHandling.kLoadMotor2, MotorType.kBrushless);
         // loadMotor2.restoreFactoryDefaults();
         // loadMotor2.setInverted(false);
         // loadMotor2.setIdleMode(IdleMode.kCoast);
@@ -56,13 +57,13 @@ public class BallHandlingSystem extends SubsystemBase {
         loadMotors = new MotorControllerGroup(loadMotor1); //, loadMotor2);
         addChild("LoadMotors", loadMotors);
 
-        stagingMotor = new CANSparkMax(Constants.BallHandling.kStagingMotor, MotorType.kBrushless);
+        stagingMotor =new SendableCANSparkMax(Constants.BallHandling.kStagingMotor, MotorType.kBrushless);
 
         stagingMotor.restoreFactoryDefaults();
         stagingMotor.setInverted(false);
         stagingMotor.setIdleMode(IdleMode.kCoast);
 
-        shootMotor = new CANSparkMax(Constants.BallHandling.kShootMotor, MotorType.kBrushless);
+        shootMotor =new SendableCANSparkMax(Constants.BallHandling.kShootMotor, MotorType.kBrushless);
         shootMotor.restoreFactoryDefaults();
         shootMotor.setInverted(false);
         shootMotor.setIdleMode(IdleMode.kCoast);
